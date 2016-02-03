@@ -2,6 +2,7 @@
   "name": "isomorphic-react-example",
   "version": "0.0.1",
   "dependencies": {
+    "alt": "^0.18.2",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
     "babel-polyfill": "^6.3.14",
@@ -9,13 +10,17 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "express": "^4.13.3",
+    "iso": "^5.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router-component": "^0.29.0",
+    "serve-favicon": "^2.3.0",
     "webpack": "^1.12.11"
   },
   "devDependencies": {
     "babel-loader": "^6.2.1",
+    "json-loader": "^0.5.4",
     "webpack": "^1.12.11"
   }
 }
