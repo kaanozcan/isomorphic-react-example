@@ -31,4 +31,4 @@ node_modules
 #webstorm
 .idea
 
-
+config.json
