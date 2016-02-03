@@ -2,7 +2,7 @@ var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
-      entry: "./src/client.js",
+      entry: "./src/client/client.js",
       output: {
         path: path.join(__dirname, "public"),
         filename: "bundle.js"
@@ -12,9 +12,9 @@ module.exports = {
         new webpack.optimize.AggressiveMergingPlugin()
       ],
       resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ["", ".js", ".jsx"],
         alias: {
-          react: path.resolve('./node_modules/react')
+          react: path.resolve("./node_modules/react")
         }
       },
       module: {
@@ -23,37 +23,41 @@ module.exports = {
             test: /\.(js|jsx)$/,
             loader: 'babel',
             include: [
-              path.join(__dirname, '/src'),
-              path.join(__dirname, '/node_modules')
+              path.join(__dirname, "/src"),
+              path.join(__dirname, "/node_modules")
             ],
             exclude: /node_modules\/(?!qs)/,
             query: {
-              presets: ['react', 'es2015', "stage-0"]
+              presets: ["react", "es2015", "stage-0"]
             }
           },
           {
+            test: /\.json/,
+            loader: "json-loader"
+          },
+          {
             test: /\.css$/,
-            loader: 'style!css'
+            loader: "style!css"
           },
           {
             test: /\.sass/,
-            loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+            loader: "style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax"
           },
           {
             test: /\.scss/,
-            loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+            loader: "style-loader!css-loader!sass-loader?outputStyle=expanded"
           },
           {
             test: /\.less/,
-            loader: 'style-loader!css-loader!less-loader'
+            loader: "style-loader!css-loader!less-loader"
           },
           {
             test: /\.styl/,
-            loader: 'style-loader!css-loader!stylus-loader'
+            loader: "style-loader!css-loader!stylus-loader"
           },
           {
             test: /\.(png|jpg|gif|woff|woff2)$/,
-            loader: 'url-loader?limit=8192'
+            loader: "url-loader?limit=8192"
           }
         ]
       }
