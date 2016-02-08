@@ -31,4 +31,8 @@ node_modules
 #webstorm
 .idea
 
+#mac related
+.DS_Store
+
+#config
 config.json
