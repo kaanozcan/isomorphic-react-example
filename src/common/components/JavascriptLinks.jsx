@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Links from "./Links"
 
 class JavascriptLinks extends Component {
   constructor(config){
@@ -11,11 +12,9 @@ class JavascriptLinks extends Component {
 
     this.state = {
       hotLinks: this.LinkStore.getState().hotLinks,
-      newLinks: this.LinkStore.getState().newLinks
+      newLinks: this.LinkStore.getState().newLinks,
+      errLinks: this.LinkStore.getState().errLinks
     }
-
-    this.LinkActions.getLinks("hot");
-    this.LinkActions.getLinks("new");
 
     this.handleStateChange = this.handleStateChange.bind(this);
   }
@@ -33,24 +32,17 @@ class JavascriptLinks extends Component {
   }
 
   render(){
-      const hotLinks = this.state.hotLinks.data ? this.state.hotLinks.data.children.map((item, index) => {
-        return (<li><a href={item.data.url} target="_blank" key={index}>{item.data.title}</a></li>)
-      }) : null;
-
-      const newLinks = this.state.newLinks.data ? this.state.newLinks.data.children.map((item, index) => {
-        return (<li><a href={item.data.url} target="_blank" key={index}>{item.data.title}</a></li>)
-      }) : null;
+      const hotLinksData = this.state.hotLinks.data ? this.state.hotLinks.data.children : [];
+      const newLinksData = this.state.newLinks.data ? this.state.newLinks.data.children : [];
 
       return (
         <div>
-          <h3>Hot Javascript Links</h3>
-          <ul>
-            {hotLinks}
-          </ul>
-          <h3>New Javascript Links</h3>
-          <ul>
-            {newLinks}
-          </ul>
+          <Links type="hot" data={hotLinksData}>
+            <h3>Hot Javascript Links</h3>
+          </Links>
+          <Links type="new" data={newLinksData}>
+            <h3>New Javascript Links</h3>
+          </Links>
         </div>
       );
   }
