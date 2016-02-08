@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 class Link extends Component{
   render(){
-    return (<li><a href={this.props.data.url}>{this.props.data.title}</a></li>)
+    return (<li><a href={this.props.data.data.url}>{this.props.data.data.title}</a></li>)
   }
 }
 
