@@ -7,6 +7,11 @@ import Home from "./Home.jsx"
 class App extends Component {
   constructor(config){
     super(config);
+
+    this.getChildContext = this.getChildContext.bind(this);
+  }
+  getChildContext(){
+    return { flux: this.props.flux }
   }
   render(){
       return (
@@ -23,6 +28,10 @@ class App extends Component {
         </div>
       );
   }
+}
+
+App.childContextTypes = {
+  flux: React.PropTypes.object
 }
 
 export default App
