@@ -44,6 +44,5 @@ server.use("/", function (req, res, next){
   });
 });
 
-const port = 7000;
 server.listen(config.port);
-console.log(`Server is on port ${port}`);
+console.log(`Server is on port ${config.port}`);
