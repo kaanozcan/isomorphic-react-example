@@ -3,7 +3,7 @@ class LinkStore {
     this.hotLinks = {};
     this.newLinks = {};
 
-    const LinkActions = this.LinkActions = this.alt.getActions("LinkActions");
+    const LinkActions = this.alt.getActions("LinkActions");
 
     this.bindListeners({
       getLinks: LinkActions.GET_LINKS,
@@ -14,16 +14,18 @@ class LinkStore {
   }
 
   getLinks({type, id}) {
+    const LinkActions = this.alt.getActions("LinkActions");
+
     this.alt.resolve(id, (done) => {
       const url = `https://www.reddit.com/r/javascript/${type}.json` ;
 
       this.alt.request({url, isOut: true}).then((response) => {
         return response.json();
       }).then((data) => {
-        this.LinkActions.getLinksSuccess({type, data});
+        LinkActions.getLinksSuccess({type, data});
         done();
       }, (err) => {
-        this.LinkActions.getLinksError({type, err});
+        LinkActions.getLinksError({type, err});
         done();
       });
     });
