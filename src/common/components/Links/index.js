@@ -11,7 +11,7 @@ class Links extends Component {
     this.LinkActions = flux.getActions("LinkActions");
 
     this.state = {
-      links: this.LinkStore.getState()[`${this.props.type}Links`]
+      links: this.LinkStore.getState()[`${this.props.type}Links`] || {}
     };
 
     this.LinkActions.getLinks(this.props.type);
@@ -30,7 +30,6 @@ class Links extends Component {
   }
 
   handleStateChange(data){
-    console.log(data);
     this.setState(Object.assign(this.state, { links: data[`${this.props.type}Links`] }));
   }
 
