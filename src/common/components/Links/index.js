@@ -14,23 +14,29 @@ class Links extends Component {
       links: this.LinkStore.getState()[`${this.props.type}Links`] || {}
     };
 
-    this.LinkActions.getLinks(this.props.type);
+    this.promiseIds = [];
+
+    this.promiseIds.push(this.LinkActions.getLinks(this.props.type).id);
 
     this.handleStateChange = this.handleStateChange.bind(this);
     this.buildLinks = this.buildLinks.bind(this);
     this.buildErr = this.buildErr.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.LinkStore.listen(this.handleStateChange);
   }
 
   componentWillUnmount(){
+    for(let id of this.promiseIds){
+      this.LinkActions.cancelGetLinks(id);
+    }
+
     this.LinkStore.unlisten(this.handleStateChange);
   }
 
   handleStateChange(data){
-    this.setState(Object.assign(this.state, { links: data[`${this.props.type}Links`] }));
+    this.setState(Object.assign(this.state, { links: data[`${this.props.type}Links`] ? data[`${this.props.type}Links`] : {} }));
   }
 
   buildLinks(){
