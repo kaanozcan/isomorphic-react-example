@@ -1,6 +1,6 @@
 class LinkActions {
   getLinks(type) {
-    return {type, id: type + "some id"};
+    return {type, id: Symbol()};
   }
   cancelGetLinks(id) {
     return id;
