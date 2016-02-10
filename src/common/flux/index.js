@@ -12,6 +12,7 @@ class Flux extends Alt {
 
     this.resolver = new AltResolver();
     this.resolve = this.resolver.resolve;
+    this.cancelResolve = this.resolver.cancelResolve;
 
     this.RequestHelper = new RequestHelper();
     this.request = this.RequestHelper.request;
