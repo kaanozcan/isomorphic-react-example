@@ -32,7 +32,7 @@ class LinkStore {
   }
 
   cancelGetLinks(id) {
-
+    this.alt.cancelResolve(id);
   }
 
   getLinksSuccess({type, data}) {
