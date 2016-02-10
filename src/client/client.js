@@ -7,7 +7,7 @@ import Flux from "../common/flux"
 import App from "../common/components/App.jsx"
 
 function DOMContentLoaded(){
-  Iso.bootstrap((state, _, container) => {
+  Iso.bootstrap((state, container) => {
       let flux = new Flux();
       flux.bootstrap(state);
       
