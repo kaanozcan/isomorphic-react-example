@@ -34,9 +34,7 @@ server.use("/", function (req, res, next){
           <script src="/assets/bundle.js"></script>
         </head>
         <body>
-          <div id="application-container">
-            ${body}
-          </div>
+          ${body}
         </body>
       </html>`
     );
