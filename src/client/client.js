@@ -11,7 +11,7 @@ function DOMContentLoaded(){
       let flux = new Flux();
       flux.bootstrap(state);
       
-      ReactDom.render(<App flux={flux} path={window.location.pathname}/>, document.getElementById("application-container"));
+      ReactDom.render(<App flux={flux} path={window.location.pathname}/>, container);
 
       flux.resolver.firstRender = false;
   });
