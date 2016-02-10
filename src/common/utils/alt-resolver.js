@@ -5,46 +5,47 @@ class AltResolver {
   constructor(){
     this.firstRender = true;
     this.pendingActions = {};
+    this.cancelables = {};
 
     this.resolve = this.resolve.bind(this);
+    this.cancelResolve = this.cancelResolve.bind(this);
   }
 
   resolve(id, action, setImmediate = (NODE_ENV === 'test')) {
     if (((BROWSER || browser) && !this.firstRender) || setImmediate) {
-      return new Promise(action);
+      const cancelable = this.cancelables[id] = this.makeCancelable(action);
+      return cancelable.promise;
     }
 
     this.pendingActions[id] = action;
   }
 
-  cancelResolve(id){
-    this.pendingActions[id].cancel();
+  cancelResolve(id) {
+    this.cancelables[id].cancel();
   }
 
   dispatchPendingActions() {
-    let promiseList = Object.keys(this.pendingActions).map((key) => {
+    let promiseList = Object.getOwnPropertySymbols(this.pendingActions).map((key) => {
       return this.makeCancelable(this.pendingActions[key]).promise
     });
 
     return new Promise((done) => {
       Promise
         .all(promiseList)
-        .catch(err => promiseList)
         .then(result => done(result));
     });
   }
 
   makeCancelable(action){
-    let hasCanceled_ = false;
-
     return {
+      hasCanceled: false,
       promise: new Promise((resolve, reject) => {
         const promise = new Promise(action);
 
-        promise.then(r => hasCanceled_ ? reject({isCanceled: true}) : resolve(r));
+        promise.then(r => this.hasCanceled ? reject({isCanceled: true}) : resolve(r));
       }),
       cancel() {
-        hasCanceled_ = true;
+        this.hasCanceled = true;
       }
     }
   }
