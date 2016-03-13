@@ -1,20 +1,24 @@
 import React from "react"
 import ReactDom from "react-dom"
 
-import Iso from "iso"
-
-import Flux from "../common/flux"
 import App from "../common/components/App.jsx"
 
-function DOMContentLoaded(){
-  Iso.bootstrap((state, container) => {
-      let flux = new Flux();
-      flux.bootstrap(state);
-      
-      ReactDom.render(<App flux={flux} path={window.location.pathname}/>, container);
+import { createStore, applyMiddleware} from "redux"
+import thunk from "redux-thunk"
 
-      flux.resolver.firstRender = false;
-  });
+import linksReducer from "../common/flux/reducers/linksReducer.js"
+
+
+function DOMContentLoaded(){
+  const store = createStore(
+    linksReducer,
+    {javascript: {new: {}, hot: {}}},
+    applyMiddleware(thunk)
+  );
+
+  ReactDom.render(<App store={store} path={window.location.pathname}/>, document.getElementById("root"));
+
+  flux.resolver.firstRender = false;
 }
 
 document.addEventListener("DOMContentLoaded", DOMContentLoaded);
