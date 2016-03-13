@@ -11,7 +11,7 @@ class App extends Component {
     this.getChildContext = this.getChildContext.bind(this);
   }
   getChildContext(){
-    return { flux: this.props.flux }
+    return { store: this.props.store }
   }
   render(){
       return (
@@ -23,7 +23,7 @@ class App extends Component {
 
           <Locations path={this.props.path}>
             <Location path="/" handler={Home}/>
-            <Location path="/javascript-links" handler={JavascriptLinks} flux={this.props.flux}/>
+            <Location path="/javascript-links" handler={JavascriptLinks} store={this.props.store}/>
           </Locations>
         </div>
       );
@@ -31,7 +31,7 @@ class App extends Component {
 }
 
 App.childContextTypes = {
-  flux: React.PropTypes.object
+  store: React.PropTypes.object
 }
 
 export default App
