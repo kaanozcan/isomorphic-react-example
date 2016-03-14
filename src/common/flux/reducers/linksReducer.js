@@ -4,9 +4,6 @@ import fetch from "isomorphic-fetch"
 
 export default function (state, action){
   switch (action.type) {
-    case actionConstants.FETCH_LINKS:
-      console.log("you shouldnt be here")
-    break;
     case actionConstants.FETCH_LINKS_SUCCESS:
       return Object.assign({}, state, {
         [action.data.subreddit]: {
