@@ -17,8 +17,6 @@ function DOMContentLoaded(){
   );
 
   ReactDom.render(<App store={store} path={window.location.pathname}/>, document.getElementById("root"));
-
-  flux.resolver.firstRender = false;
 }
 
 document.addEventListener("DOMContentLoaded", DOMContentLoaded);
