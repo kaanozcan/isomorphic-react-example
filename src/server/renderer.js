@@ -23,8 +23,8 @@ export default function (req, res, next){
       </head>
       <body>
         <div id="root">
+          ${markup}
         </div>
-        ${markup}
       </body>
     </html>`
   );
