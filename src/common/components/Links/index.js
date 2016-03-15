@@ -1,22 +1,18 @@
 import React, { Component } from "react"
+import { fetchLinks } from "../../flux/actionCreators"
 import Link from "./Link"
 
 class Links extends Component {
   constructor(config, context){
     super(config);
 
-    const flux = this.flux = context.flux;
-
-    this.LinkStore = flux.getStore("LinkStore");
-    this.LinkActions = flux.getActions("LinkActions");
+    const store = this.store = context.store;
+    console.log(this.store);
+    const storeState = store.getState();
 
     this.state = {
-      links: this.LinkStore.getState()[`${this.props.type}Links`] || {}
+      links: storeState.javascript || storeState.javascript[this.props.type] || {}
     };
-
-    this.promiseIds = [];
-
-    this.promiseIds.push(this.LinkActions.getLinks(this.props.type).id);
 
     this.handleStateChange = this.handleStateChange.bind(this);
     this.buildLinks = this.buildLinks.bind(this);
@@ -24,19 +20,18 @@ class Links extends Component {
   }
 
   componentDidMount() {
-    this.LinkStore.listen(this.handleStateChange);
+    this.unsubscribe = this.store.subscribe(this.handleStateChange);
+    this.store.dispatch(fetchLinks("javascript", this.props.type));
   }
 
   componentWillUnmount(){
-    for(let id of this.promiseIds){
-      this.LinkActions.cancelGetLinks(id);
-    }
-
-    this.LinkStore.unlisten(this.handleStateChange);
+    this.unsubscribe();
   }
 
   handleStateChange(data){
-    this.setState(Object.assign(this.state, { links: data[`${this.props.type}Links`] ? data[`${this.props.type}Links`] : {} }));
+    this.setState(
+      Object.assign(this.state, data)
+    );
   }
 
   buildLinks(){
@@ -73,7 +68,7 @@ class Links extends Component {
 }
 
 Links.contextTypes = {
-  flux: React.PropTypes.object
+  store: React.PropTypes.object
 };
 
 export default Links
