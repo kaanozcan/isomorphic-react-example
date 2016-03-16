@@ -3,6 +3,7 @@ var path = require("path");
 
 module.exports = {
       entry: "./src/client/client.js",
+      devtool: "source-map",
       output: {
         path: path.join(__dirname, "public"),
         filename: "bundle.js"
