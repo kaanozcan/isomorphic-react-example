@@ -7,12 +7,8 @@ class Links extends Component {
     super(config);
 
     const store = this.store = context.store;
-    console.log(this.store);
-    const storeState = store.getState();
 
-    this.state = {
-      links: storeState.javascript || storeState.javascript[this.props.type] || {}
-    };
+    this.state = store.getState();
 
     this.handleStateChange = this.handleStateChange.bind(this);
     this.buildLinks = this.buildLinks.bind(this);
@@ -30,12 +26,12 @@ class Links extends Component {
 
   handleStateChange(data){
     this.setState(
-      Object.assign(this.state, data)
+      Object.assign({}, this.state, this.store.getState())
     );
   }
 
   buildLinks(){
-    const data = this.state.links.data ? this.state.links.data.children : [];
+    const data = this.state.javascript[this.props.type] && this.state.javascript[this.props.type].data ? this.state.javascript[this.props.type].data : [];
 
     const links = data.map((item, index) => {
       return (<Link data={item} key={index}/>)
@@ -55,7 +51,8 @@ class Links extends Component {
   }
 
   render(){
-    const content = this.state.links.error ? this.buildErr() : this.buildLinks();
+    const err = this.state.javascript[this.props.type] && this.state.javascript[this.props.type].error ? this.state.javascript[this.props.type].error : false;
+    const content = err ? this.buildErr() : this.buildLinks();
 
     return (
       <div>
