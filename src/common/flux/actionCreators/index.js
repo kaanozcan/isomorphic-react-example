@@ -7,14 +7,10 @@ export function fetchLinks (subreddit, type){
       .then(response => response.json())
       .then(json =>
         dispatch(
-          fetchLinksSuccess(subreddit, type, JSON.parse(json)
+          fetchLinksSuccess(subreddit, type, json
         )
       ),
-      err =>
-        dispatch(
-          fetchLinksError(subreddit, type, err
-        )
-      )
+      err => dispatch(fetchLinksError(subreddit, type, err))
     )
   }
 }
