@@ -9,7 +9,7 @@ export default function (state, action){
         [action.data.subreddit]: {
           [action.data.type]: {
             error: false,
-            data: action.data.data
+            data: action.data.data.data.children
           }
         }
       });
