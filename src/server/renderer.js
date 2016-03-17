@@ -1,15 +1,17 @@
 import React from "react"
 import { renderToString } from "react-dom/server"
 import { createStore, applyMiddleware} from "redux"
-import linksReducer from "../common/flux/reducers/linksReducer.js"
+import linkReducer from "../common/flux/reducers/linkReducer.js"
 import thunk from "redux-thunk"
 import App from "../common/components/App.jsx"
+
+
 
 
 export default function (req, res, next){
   console.log(linksReducer);
   const store = createStore(
-    linksReducer,
+    linkReducer,
     {javascript: {new: {}, hot: {}}},
     applyMiddleware(thunk)
   );
