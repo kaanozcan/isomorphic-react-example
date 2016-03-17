@@ -31,7 +31,7 @@ class Links extends Component {
   }
 
   buildLinks(){
-    const data = this.state.javascript[this.props.type] && this.state.javascript[this.props.type].data ? this.state.javascript[this.props.type].data : [];
+    const data = this.state["javascript" + this.props.type] && this.state["javascript" + this.props.type].data ? this.state["javascript" + this.props.type].data : [];
 
     const links = data.map((item, index) => {
       return (<Link data={item} key={index}/>)
@@ -51,7 +51,7 @@ class Links extends Component {
   }
 
   render(){
-    const err = this.state.javascript[this.props.type] && this.state.javascript[this.props.type].error ? this.state.javascript[this.props.type].error : false;
+    const err = this.state["javascript" + this.props.type] && this.state["javascript" + this.props.type].error ? this.state["javascript" + this.props.type].error : false;
     const content = err ? this.buildErr() : this.buildLinks();
 
     return (
