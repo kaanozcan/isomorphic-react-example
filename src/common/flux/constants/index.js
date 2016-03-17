@@ -1,7 +1,20 @@
-const actionConstants = {
-  "FETCH_LINKS": "FETCH_LINKS",
-  "FETCH_LINKS_SUCCESS": "FETCH_LINKS_SUCCESS",
-  "FETCH_LINKS_ERROR": "FETCH_LINKS_ERROR"
+const actions = {
+  linkActions: {
+    "FETCH": "FETCH",
+    "FETCH_SUCCESS": "FETCH_SUCCESS",
+    "FETCH_ERROR": "FETCH_ERROR"
+  },
+  requestActions: {
+    "ADD": "ADD"
+  }
+};
+
+const makeSymbol = function (ob){
+  return Object.keys(ob).reduce(function (prev, curr){
+    prev[curr] = typeof ob[curr] === "object" ? makeSymbol(ob[curr]) : Symbol(ob[curr]);
+
+    return prev;
+  }, {});
 }
 
-export { actionConstants }
+export default makeSymbol(actions);
