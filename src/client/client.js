@@ -6,15 +6,18 @@ import App from "../common/components/App.jsx"
 import { createStore, applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 
-import linksReducer from "../common/flux/reducers/linksReducer.js"
+import resolver from "../common/flux/middleware/reduxResolver.js"
+import linkReducer from "../common/flux/reducers/linkReducer.js"
 
+import rootComponent from "../utils/root-component.js";
 
 function DOMContentLoaded(){
   const store = createStore(
-    linksReducer,
-    {javascript: {new: {}, hot: {}}},
-    applyMiddleware(thunk)
+    linkReducer,
+    {},
+    applyMiddleware(resolver, thunk)
   );
+
 
   ReactDom.render(<App store={store} path={window.location.pathname}/>, document.getElementById("root"));
 }
