@@ -39,3 +39,4 @@ config.json
 
 #build releted
 public/bundle.js
+public/bundle.js.map
