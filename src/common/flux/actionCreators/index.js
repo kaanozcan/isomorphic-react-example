@@ -1,8 +1,9 @@
-import { linkActions } from "../constants"
+import constants from "../constants"
 
 export function fetchLinks (subreddit, type){
-  return (dispatch) => {
+  return (dispatch) => (done) => {
     const url = `https://www.reddit.com/r/${subreddit}/${type}.json` ;
+
     fetch(url)
       .then(response => {
         if(response.status >= 200 && response.status < 300){
@@ -16,19 +17,21 @@ export function fetchLinks (subreddit, type){
         return response.json()
       })
       .then(response => response.json())
-      .then(json =>
-        dispatch(
-          fetchLinksSuccess(subreddit, type, json
-        )
-      ),
-        err => dispatch(fetchLinksError(subreddit, type, err))
+      .then(json => {
+          dispatch(fetchLinksSuccess(subreddit, type, json))
+          done();
+        },
+        err => {
+          dispatch(fetchLinksError(subreddit, type, err))
+          done();
+        }
     )
   }
 }
 
 export function fetchLinksSuccess (subreddit, type, data){
   return {
-    type: linkActions.FETCH_SUCCESS,
+    type: constants.linkActions.FETCH_SUCCESS,
     data: {
       subreddit,
       type,
@@ -39,7 +42,7 @@ export function fetchLinksSuccess (subreddit, type, data){
 
 export function fetchLinksError (subreddit, type, error){
   return {
-    type: linkActions.FETCH_ERROR,
+    type: constants.linkActions.FETCH_ERROR,
     data: {
       subreddit,
       type,
