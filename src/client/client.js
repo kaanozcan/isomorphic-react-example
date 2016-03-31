@@ -4,16 +4,17 @@ import ReactDom from "react-dom"
 import App from "../common/components/App.jsx"
 
 import { createStore, applyMiddleware} from "redux"
-import thunk from "redux-thunk"
 
 import resolver from "../common/flux/middlewares/reduxResolver.js"
 import linkReducer from "../common/flux/reducers/linkReducer.js"
 
 function DOMContentLoaded(){
+  const resolverMiddleware = resolver();
+
   const store = createStore(
     linkReducer,
     {},
-    applyMiddleware(resolver, thunk)
+    applyMiddleware(resolverMiddleware.resolver)
   );
 
 
