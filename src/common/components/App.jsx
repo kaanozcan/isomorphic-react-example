@@ -5,14 +5,6 @@ import JavascriptLinks from "./JavascriptLinks.jsx"
 import Home from "./Home.jsx"
 
 class App extends Component {
-  constructor(config){
-    super(config);
-
-    this.getChildContext = this.getChildContext.bind(this);
-  }
-  getChildContext(){
-    return { store: this.props.store }
-  }
   render(){
       return (
         <div>
@@ -28,10 +20,6 @@ class App extends Component {
         </div>
       );
   }
-}
-
-App.childContextTypes = {
-  store: React.PropTypes.object
 }
 
 export default App
