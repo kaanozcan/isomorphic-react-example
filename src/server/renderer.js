@@ -18,26 +18,8 @@ export default function (req, res, next){
   );
 
   let markup = renderToString(<Provider store={store}><App path={req.url}/></Provider>);
-  console.log("first markup", markup);
-/*
-  res.status(200).send(
-      `<html>
-      <head>
-        <script src="/assets/bundle.js"></script>
-      </head>
-      <body>
-        <div id="root">
-          ${markup}
-        </div>
-      </body>
-    </html>`
-  );
-*/
 
   resolverMiddleware.dispatchAll().then(() => {
-    console.log("bitch wuno");
-    console.log("store.getState()", store.getState());
-
     const finalStore = createStore(
       linkReducer,
       store.getState(),
@@ -45,7 +27,7 @@ export default function (req, res, next){
     );
 
     markup = renderToString(<Provider store={finalStore}><App path={req.url}/></Provider>);
-    console.log("maybe here?");
+
     res.status(200).send(
         `<html>
         <head>
@@ -59,5 +41,5 @@ export default function (req, res, next){
       </html>`
     );
   });
-  
+
 }
