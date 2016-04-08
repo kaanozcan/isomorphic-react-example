@@ -3,9 +3,6 @@ const actions = {
     "FETCH": "FETCH",
     "FETCH_SUCCESS": "FETCH_SUCCESS",
     "FETCH_ERROR": "FETCH_ERROR"
-  },
-  requestActions: {
-    "ADD": "ADD"
   }
 };
 
