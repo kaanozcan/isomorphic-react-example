@@ -4,7 +4,7 @@ This is a simple example of isomorphic react application I made to show some gen
 
 ####Stack
 
-Using Redux for flux framework and react-router-component for routing, Webpack for bundling, Babel for ES6 support. Integrated with Reddit Api.
+Using Redux for flux framework, react-router-component for routing, Webpack for bundling, Babel for ES6 support. Integrated with Reddit Api.
 
 ####How To  
 
