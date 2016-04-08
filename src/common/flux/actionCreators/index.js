@@ -1,4 +1,4 @@
-import constants from "../constants"
+import { linkAction } from "../constants"
 
 export function fetchLinks (subreddit, type){
   return (dispatch) => (done) => {
@@ -24,14 +24,13 @@ export function fetchLinks (subreddit, type){
         err => {
           dispatch(fetchLinksError(subreddit, type, err))
           done();
-        }
-    )
+        });
   }
 }
 
 export function fetchLinksSuccess (subreddit, type, data){
   return {
-    type: constants.linkActions.FETCH_SUCCESS,
+    type: linkActions.FETCH_SUCCESS,
     data: {
       subreddit,
       type,
@@ -42,7 +41,7 @@ export function fetchLinksSuccess (subreddit, type, data){
 
 export function fetchLinksError (subreddit, type, error){
   return {
-    type: constants.linkActions.FETCH_ERROR,
+    type: linkActions.FETCH_ERROR,
     data: {
       subreddit,
       type,
