@@ -29,7 +29,12 @@ module.exports = {
             ],
             exclude: /node_modules\/(?!qs)/,
             query: {
-              presets: ["react", "es2015", "stage-0"]
+              presets: ["react", "es2015", "stage-0"],
+              plugins: ["transform-es2015-arrow-functions",
+                ["transform-es2015-modules-commonjs-simple", {
+                    "noMangle": true
+                }]
+              ]
             }
           },
           {
