@@ -4,17 +4,23 @@ This is a simple example of isomorphic react application I made to show some gen
 
 ####Stack
 
-Using Alt.js and react-router-component for simplicity, Webpack for bundling, Babel for ES6 support. Integrated with Reddit Api.
+Using Redux for flux framework, react-router-component for routing, Webpack for bundling, Babel for ES6 support. Integrated with Reddit Api.
 
-####How To
+####How To  
 
-To run first you need to create a json file named config which has to have a key named port on the root and then run the commands below.
+To run first you need to create a json file named config on root folder which you have to specify port.  
+
+config.json example:  
 
 ```
-npm install
-node bootstrap.js
+{
+  "port": "3000"
+}
 ```
 
-####Criticize Me
-
-Yes, do it soon. Do it early. Do it now :)
+And then run these commands on terminal.
+```
+npm install  
+webpack  
+node bootstrap.js  
+```

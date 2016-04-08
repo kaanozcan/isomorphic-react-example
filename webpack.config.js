@@ -3,6 +3,7 @@ var path = require("path");
 
 module.exports = {
       entry: "./src/client/client.js",
+      devtool: "source-map",
       output: {
         path: path.join(__dirname, "public"),
         filename: "bundle.js"
@@ -28,7 +29,12 @@ module.exports = {
             ],
             exclude: /node_modules\/(?!qs)/,
             query: {
-              presets: ["react", "es2015", "stage-0"]
+              presets: ["react", "es2015", "stage-0"],
+              plugins: ["transform-es2015-arrow-functions",
+                ["transform-es2015-modules-commonjs-simple", {
+                    "noMangle": true
+                }]
+              ]
             }
           },
           {
