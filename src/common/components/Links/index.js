@@ -5,7 +5,6 @@ import Link from "./Link"
 
 class Links extends Component {
   componentWillMount(){
-    console.log("i got called", this.props.type)
     this.props.fetchLinks();
   }
   buildLinks(){
@@ -27,7 +26,6 @@ class Links extends Component {
   }
 
   render(){
-    console.log("render links", this.props.type);
     const content = this.props.error ? this.buildErr() : this.buildLinks();
 
     return (
@@ -51,7 +49,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const mapStateToProps = (state, ownProps) => {
   const data = state.has("javascript" + ownProps.type) && state.get("javascript" + ownProps.type).data || []
   const error = state.has("javascript" + ownProps.type) && state.get("javascript" + ownProps.type).error || false;
-  console.log("stateToProps", data);
 
   return {
     data: data,
