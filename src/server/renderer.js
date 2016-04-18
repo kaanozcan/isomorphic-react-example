@@ -20,13 +20,7 @@ export default function (req, res, next){
   let markup = renderToString(<Provider store={store}><App path={req.url}/></Provider>);
 
   resolverMiddleware.dispatchAll().then(() => {
-    const finalStore = createStore(
-      linkReducer,
-      store.getState(),
-      applyMiddleware(resolverMiddleware.resolver)
-    );
-
-    markup = renderToString(<Provider store={finalStore}><App path={req.url}/></Provider>);
+    markup = renderToString(<Provider store={store}><App path={req.url}/></Provider>);
 
     res.status(200).send(
         `<html>
