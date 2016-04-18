@@ -1,4 +1,4 @@
-import { linkAction } from "../constants"
+import { linkActions } from "../constants"
 
 export function fetchLinks (subreddit, type){
   return (dispatch) => (done) => {
